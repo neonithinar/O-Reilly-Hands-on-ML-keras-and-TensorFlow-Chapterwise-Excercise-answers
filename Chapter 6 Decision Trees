@@ -1,0 +1,34 @@
+1) What is the approximate depth of a Decision Tree trained (without restrictions)
+on a training set with 1 million instances?
+
+An unrestricted Decision Tree model will fit ( or rather overfit) one leaf per instance. For a Training set with m leaves, 
+it will have log2(m)^3  depth. So for this case the depth will be log2(10^6) = 20 approx maybe a bit more
+
+2. Is a node’s Gini impurity generally lower or greater than its parent’s? Is it gener‐
+ally lower/greater, or always lower/greater?
+
+
+    Gini's impurity score is generally lower than its parent.
+    However, it is possible for a child node to have higher Gini's score as long as it's compensated by its other binary node and by the weights of its sample size.
+
+
+3. If a decision tree is overfitting the training set, is it a good idea to try decreasing max_depth?
+
+    Yes, It's a good idea since you're contraining the model's predictions to bigger sample_size averages.
+
+4. If a decision tree is underfitting the training set, is it a good idea to try scaling the input features?
+
+    Decision Trees don't need feature scaling for them to work, you can reduce underfitting by increasing max_depth, decreasing min_leaf_samples or any of the other regularization hyper-parameters.
+
+
+
+5. If it takes one hour to train a decision tree on a training set containing one million instances, roughly how much time it would take it on a 10M training set?
+
+    Training time = (n X 10m X log(10m)) / (n x m x log(m)) = 11.7 hours
+    
+6. If your training set contains 100,000 instances, will setting presort=True speed up training?
+
+    It will actually slow down training. Presorting only speeds up data if the dataset is smaller than a few thousand instances
+    
+
+
