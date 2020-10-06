@@ -1,0 +1,46 @@
+1. If you have trained five different models on the exact same training data, and
+they all achieve 95% precision, is there any chance that you can combine these
+models to get better results? If so, how? If not, why?
+
+You can combine these models into a voting ensemble to try to get better results. This works better on models that are very different,
+and trained on different training instances, but it will still work as long as the models are very different.
+
+2. What is the difference between hard and soft voting classifiers?
+
+Hard voting classifiers:  counts the votes for each classifier in the ensemble and picks the classifier with most votes
+Soft voting classifier: computes the average estimated class probability for each class and picks the class with the highest probability.
+Gives high-confidence votes more weight, but only works if every classifier is able to estimate class probabilities.
+
+3. Is it possible to speed up training of a bagging ensemble by distributing it across
+multiple servers? What about pasting ensembles, boosting ensembles, random
+forests, or stacking ensembles?
+
+  It is possible to speed up training of bagging, pasting, and random forests because each predictor is independent of the others.
+boosting ensemble predictors are built based on the previous predictor, so you separating training will not help.
+For stacking ensembles, all predictors for one layer has to be trained before the next layer.
+
+
+4. What is the benefit of out-of-bag evaluation?
+
+Each predictor in a bagging ensemble is evaluated using instances it was not trained on. This creates an unbiased eval of the ensemble without the need
+for a validation set. You can have more instances for training, and your ensemble can perform slightly better.
+
+5. What makes Extra-Trees more random than regular Random Forests? How can
+this extra randomness help? Are Extra-Trees slower or faster than regular Ran‐
+dom Forests?
+
+Extra-trees use random thresholds for each feature, instead of finding the best threshold. The extra randomness acts like a form of regularization 
+and can be used to fix overfitting. However, this is neither faster nor slower than random forests when making decisions
+
+6. If your AdaBoost ensemble underfits the training data, what hyperparameters
+should you tweak and how?
+  
+If your AdaBoost ensemble is underfitting the training set, you can
+try increasing the number of estimators or reductthe regularisation parameter of the base estimator
+
+7. If your Gradient Boosting ensemble overfits the training set, should you increase
+or decrease the learning rate?
+
+learning_rate hyperparameter(also called shirinkage) scales the contribution of each tree. Recucing the learning_rate can reduce overfitting. Naive gradient boosting is the same as gradient boosting with 
+shrinkage where the shrinkage factor is set to 1.0. Setting values less than 1.0 has the effect of making less corrections for each tree added to the model.
+This in turn results in more trees that must be added to the model.
