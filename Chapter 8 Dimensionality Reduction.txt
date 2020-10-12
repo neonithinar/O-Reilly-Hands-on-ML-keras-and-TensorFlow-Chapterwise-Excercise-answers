@@ -1,0 +1,59 @@
+1. What are the main motivations for reducing a dataset’s dimensionality? What are
+the main drawbacks?
+
+Motivations:
++ Speed up subsequent training algorithm
++ Visualize the data and gain insights on the most important features
++ Save space (compression)
+Drawbacks:
++ Some info is lost, possibly degrading performance
++ Computationally intensive
++ Adds some complexity to your ML pipelines
++ Transformed features can be hard to interpret
+
+2. What is the curse of dimensionality?
+
+The curse of dimensionality refers to the phenomena that occur when classifying, organizing, and analyzing high dimensional data that does
+not occur in low dimensional spaces, specifically the issue of data sparsity and “closeness” of data. ie; Randomly sampled high-dimensional vectors are 
+generally very sparse, which increases the risk of overfitting and making it very difficult to identify patterns in data without having plenty of training data.
+
+3. Once a dataset’s dimensionality has been reduced, is it possible to reverse the
+operation? If so, how? If not, why?
+
+It's almost impossible to reverse it because some vairance (information) gets lost during demensionality reduction. 
+Some algorithms can reverse most data easily, and some cannot.
+
+
+4. Can PCA be used to reduce the dimensionality of a highly nonlinear dataset?
+
+PCA can at least get rid of useless dimensions, which will significantly reduce the demensionality of most datasets. However, reducing demensionality of datasets 
+without useless dimensions will loose too much info. "You want to unroll the swiss roll, not squash it"
+
+
+5. Suppose you perform PCA on a 1,000-dimensional dataset, setting the explained
+variance ratio to 95%. How many dimensions will the resulting dataset have?
+
+Depends on dataset.
+If it is comprised of points that are perfectly aligned, PCA can reduce the dataset down to 1 dimension and preserve 95% of the variance.
+If it is comprised of perfectly random points in 1000 dimensions, then we could have 1 to 1000 dimensions in order to preserve 95% of the variance.
+
+6. In what cases would you use vanilla PCA, Incremental PCA, Randomized PCA,
+or Kernel PCA?
+
++ Vanilla: works only if the dataset fits in memory
++ Incremental: useful for large datasets that don't fit in memory, but is slower than regular. Also useful for online tasks, when you apply PCA on the fly
++ Randomized: useful when you want to considerably reduce dimensionality and the dataset fits in memory
++ Kernel: Useful for nonlinear datasets
+
+7. How can you evaluate the performance of a dimensionality reduction algorithm
+on your dataset?
+
+Perform a reverse transformation and measure the reconstruction error
++ When it can't be reversed, then use dimensionality reduction as a pre-processing step and measure the performance of the 2nd algorithm.
+The 2nd algorithm will perform just as well if it didn't lose any important data.
+
+8. Does it make any sense to chain two different dimensionality reduction algo‐
+rithms?
+
+You can chain two different algorithms, such as PCA to quickly get rid of unnecessary data and then LLE that works slower. This will likely yield
+the same performance, but with faster results.
